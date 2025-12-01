@@ -1,0 +1,23 @@
+{
+  "name": "@barangay/backend",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Supabase backend for Barangay Connect",
+  "scripts": {
+    "db:init": "supabase init",
+    "db:start": "supabase start",
+    "db:stop": "supabase stop",
+    "db:status": "supabase status",
+    "db:reset": "supabase db reset",
+    "db:diff": "supabase db diff",
+    "db:push": "supabase db push",
+    "db:pull": "supabase db pull",
+    "db:seed": "supabase db seed",
+    "functions:serve": "supabase functions serve",
+    "functions:deploy": "supabase functions deploy",
+    "generate:types": "supabase gen types typescript --local > ../shared/src/types/database.ts"
+  },
+  "devDependencies": {
+    "supabase": "^1.200.0"
+  }
+}
