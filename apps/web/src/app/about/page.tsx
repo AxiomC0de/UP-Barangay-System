@@ -218,6 +218,7 @@ export default function AboutPage() {
                 src="/images/chairman_aboutus.png"
                 alt="Punong Barangay Lawrence V. Mappala"
                 fill
+                sizes="(max-width: 768px) 100vw, 400px"
                 style={{ objectFit: 'contain' }}
               />
             </Box>
@@ -317,6 +318,7 @@ export default function AboutPage() {
                             src={councilor.image}
                             alt={councilor.name}
                             fill
+                            sizes="200px"
                             style={{ objectFit: 'contain' }}
                           />
                         </Box>
@@ -397,6 +399,7 @@ export default function AboutPage() {
                     src="/images/Angelica.png"
                     alt={SK_CHAIRPERSON.name}
                     fill
+                    sizes="200px"
                     style={{ objectFit: 'contain' }}
                   />
                 </Box>
@@ -498,6 +501,7 @@ export default function AboutPage() {
                 src="/images/aerial_up.png"
                 alt="Aerial view of Barangay U.P. Campus and UP Diliman"
                 fill
+                sizes="(max-width: 768px) 100vw, 800px"
                 style={{ objectFit: 'cover' }}
               />
             </Box>
@@ -555,6 +559,7 @@ export default function AboutPage() {
                 src="/images/barangay_upcampus_hall.png"
                 alt="Barangay U.P. Campus Hall and Community"
                 fill
+                sizes="(max-width: 768px) 100vw, 800px"
                 style={{ objectFit: 'cover' }}
               />
             </Box>
@@ -625,6 +630,7 @@ export default function AboutPage() {
                   src="/images/qc_logo.png"
                   alt="Quezon City Logo"
                   fill
+                  sizes="120px"
                   style={{ objectFit: 'contain' }}
                 />
               </Box>
@@ -645,6 +651,7 @@ export default function AboutPage() {
                   src="/images/bayan.png"
                   alt="Barangay U.P. Campus Logo"
                   fill
+                  sizes="120px"
                   style={{ objectFit: 'contain' }}
                 />
               </Box>
@@ -665,6 +672,7 @@ export default function AboutPage() {
                   src="/images/up_logo.png"
                   alt="University of the Philippines Logo"
                   fill
+                  sizes="120px"
                   style={{ objectFit: 'contain' }}
                 />
               </Box>

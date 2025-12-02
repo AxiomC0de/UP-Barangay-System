@@ -258,6 +258,7 @@ export default function HeroSection() {
               src="/images/chairman.svg"
               alt="Barangay Chairman"
               fill
+              sizes="(max-width: 1024px) 300px, 400px"
               style={{
                 objectFit: 'contain',
               }}
@@ -287,6 +288,7 @@ export default function HeroSection() {
           src="/images/chairman.svg"
           alt="Barangay Chairman"
           fill
+          sizes="300px"
           style={{
             objectFit: 'contain',
           }}

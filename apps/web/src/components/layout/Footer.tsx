@@ -99,6 +99,7 @@ export default function Footer() {
                       src="/images/logo.jpg"
                       alt="Barangay U.P. Campus Logo"
                       fill
+                      sizes="60px"
                       style={{
                         objectFit: 'cover',
                       }}

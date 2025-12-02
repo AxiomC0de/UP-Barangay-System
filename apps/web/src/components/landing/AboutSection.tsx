@@ -42,6 +42,7 @@ export default function AboutSection() {
               src="/images/landing-brief-aboutus.png"
               alt="Barangay U.P. Campus Community"
               fill
+              sizes="(max-width: 768px) 100vw, 50vw"
               style={{
                 objectFit: 'cover',
               }}

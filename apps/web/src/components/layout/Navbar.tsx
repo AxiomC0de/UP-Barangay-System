@@ -190,6 +190,7 @@ export default function Navbar({ hideNavLinks = false }: NavbarProps) {
                     src="/images/logo.jpg"
                     alt="Barangay U.P. Campus Logo"
                     fill
+                    sizes="40px"
                     style={{ objectFit: 'cover' }}
                   />
                 </Box>
@@ -315,6 +316,7 @@ export default function Navbar({ hideNavLinks = false }: NavbarProps) {
                   src="/images/logo.jpg"
                   alt="Barangay U.P. Campus Logo"
                   fill
+                  sizes="40px"
                   style={{ objectFit: 'cover' }}
                 />
               </Box>
