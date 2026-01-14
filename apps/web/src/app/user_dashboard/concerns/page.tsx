@@ -12,13 +12,11 @@ import Card from '@mui/material/Card';
 import Chip from '@mui/material/Chip';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import SearchIcon from '@mui/icons-material/Search';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 import AddIcon from '@mui/icons-material/Add';
-import { useRouter } from 'next/navigation';
 
 const concerns = [
   {
@@ -155,7 +153,6 @@ const getPriorityLabel = (priority: string) => {
 };
 
 export default function ConcernsPage() {
-  const router = useRouter();
   const [activeTab, setActiveTab] = useState(0);
 
   const handleTabChange = (_event: React.SyntheticEvent, newValue: number) => {
@@ -172,46 +169,27 @@ export default function ConcernsPage() {
   });
 
   return (
-    <Box sx={{ display: 'flex' }}>
-      {/* Main Content */}
+    <Box>
+      {/* Header */}
       <Box
         sx={{
-          flex: 1,
-          maxWidth: 600,
-          borderRight: '1px solid #2f3336',
+          position: 'sticky',
+          top: 0,
+          bgcolor: 'rgba(0, 0, 0, 0.65)',
+          backdropFilter: 'blur(12px)',
+          zIndex: 10,
+          borderBottom: '1px solid #2f3336',
         }}
       >
-        {/* Header */}
         <Box
           sx={{
-            position: 'sticky',
-            top: 0,
-            bgcolor: 'rgba(0, 0, 0, 0.65)',
-            backdropFilter: 'blur(12px)',
-            zIndex: 10,
-            borderBottom: '1px solid #2f3336',
+            display: 'flex',
+            alignItems: 'center',
+            gap: 2,
+            px: 2,
+            py: 1.5,
           }}
         >
-          <Box
-            sx={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: 2,
-              px: 2,
-              py: 1,
-            }}
-          >
-            <IconButton
-              onClick={() => router.back()}
-              sx={{
-                color: '#e7e9ea',
-                '&:hover': {
-                  bgcolor: 'rgba(231, 233, 234, 0.1)',
-                },
-              }}
-            >
-              <ArrowBackIcon />
-            </IconButton>
             <Typography
               variant="h6"
               sx={{
@@ -479,144 +457,6 @@ export default function ConcernsPage() {
             </Typography>
           </Box>
         )}
-      </Box>
-
-      {/* Right Sidebar */}
-      <Box
-        sx={{
-          width: 350,
-          flexShrink: 0,
-          display: { xs: 'none', lg: 'block' },
-        }}
-      >
-        {/* Sticky Search */}
-        <Box
-          sx={{
-            position: 'sticky',
-            top: 0,
-            bgcolor: '#000',
-            pt: 2,
-            pb: 1,
-            px: 2,
-            zIndex: 10,
-          }}
-        >
-          <TextField
-            fullWidth
-            size="small"
-            placeholder="Search concerns"
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <SearchIcon sx={{ color: '#71767b' }} />
-                </InputAdornment>
-              ),
-            }}
-            sx={{
-            '& .MuiOutlinedInput-root': {
-              borderRadius: 5,
-              bgcolor: '#202327',
-              '& fieldset': {
-                borderColor: 'transparent',
-              },
-              '&:hover fieldset': {
-                borderColor: 'transparent',
-              },
-              '&.Mui-focused fieldset': {
-                borderColor: '#7B1113',
-              },
-              '& input': {
-                color: '#e7e9ea',
-                '&::placeholder': {
-                  color: '#71767b',
-                  opacity: 1,
-                },
-              },
-            },
-          }}
-        />
-        </Box>
-
-        {/* Scrollable Content */}
-        <Box sx={{ px: 2 }}>
-        {/* Stats */}
-        <Card
-          sx={{
-            bgcolor: '#16181c',
-            borderRadius: 3,
-            mb: 2,
-            p: 2,
-            border: '1px solid #2f3336',
-          }}
-        >
-          <Typography sx={{ fontWeight: 700, fontSize: '1.25rem', color: '#e7e9ea', mb: 2 }}>
-            Statistics
-          </Typography>
-          <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1.5 }}>
-            <Typography sx={{ color: '#71767b', fontSize: '0.9375rem' }}>Total Concerns</Typography>
-            <Typography sx={{ color: '#e7e9ea', fontWeight: 700 }}>156</Typography>
-          </Box>
-          <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1.5 }}>
-            <Typography sx={{ color: '#71767b', fontSize: '0.9375rem' }}>Open</Typography>
-            <Typography sx={{ color: '#FF9800', fontWeight: 700 }}>23</Typography>
-          </Box>
-          <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1.5 }}>
-            <Typography sx={{ color: '#71767b', fontSize: '0.9375rem' }}>In Progress</Typography>
-            <Typography sx={{ color: '#2196F3', fontWeight: 700 }}>18</Typography>
-          </Box>
-          <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-            <Typography sx={{ color: '#71767b', fontSize: '0.9375rem' }}>Resolved</Typography>
-            <Typography sx={{ color: '#4CAF50', fontWeight: 700 }}>115</Typography>
-          </Box>
-        </Card>
-
-        {/* Categories */}
-        <Card
-          sx={{
-            bgcolor: '#16181c',
-            borderRadius: 3,
-            overflow: 'hidden',
-            border: '1px solid #2f3336',
-          }}
-        >
-          <Box sx={{ p: 2, pb: 1 }}>
-            <Typography sx={{ fontWeight: 700, fontSize: '1.25rem', color: '#e7e9ea' }}>
-              Categories
-            </Typography>
-          </Box>
-          {[
-            { name: 'Infrastructure', count: 45 },
-            { name: 'Utilities', count: 32 },
-            { name: 'Sanitation', count: 28 },
-            { name: 'Safety', count: 24 },
-            { name: 'Noise', count: 18 },
-            { name: 'Others', count: 9 },
-          ].map((category, index) => (
-            <Box
-              key={index}
-              sx={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                px: 2,
-                py: 1.5,
-                cursor: 'pointer',
-                '&:hover': {
-                  bgcolor: 'rgba(231, 233, 234, 0.03)',
-                },
-              }}
-            >
-              <Typography sx={{ fontSize: '0.9375rem', color: '#e7e9ea' }}>
-                {category.name}
-              </Typography>
-              <Typography sx={{ fontSize: '0.875rem', color: '#71767b' }}>
-                {category.count}
-              </Typography>
-            </Box>
-          ))}
-        </Card>
-        </Box>
-      </Box>
     </Box>
   );
 }

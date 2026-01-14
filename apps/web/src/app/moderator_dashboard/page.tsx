@@ -15,6 +15,9 @@ import DialogTitle from '@mui/material/DialogTitle';
 import DialogContent from '@mui/material/DialogContent';
 import DialogActions from '@mui/material/DialogActions';
 import Button from '@mui/material/Button';
+import GifBoxOutlinedIcon from '@mui/icons-material/GifBoxOutlined';
+import PollOutlinedIcon from '@mui/icons-material/PollOutlined';
+import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
 import ImageOutlinedIcon from '@mui/icons-material/ImageOutlined';
 import EmojiEmotionsOutlinedIcon from '@mui/icons-material/EmojiEmotionsOutlined';
 import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
@@ -217,6 +220,7 @@ export default function ModeratorDashboardPage() {
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const [flagDialogOpen, setFlagDialogOpen] = useState(false);
   const [flagReason, setFlagReason] = useState('');
+  const [newPostText, setNewPostText] = useState('');
 
   const handleMenuOpen = (event: React.MouseEvent<HTMLElement>, post: typeof initialPosts[0]) => {
     setMenuAnchorEl(event.currentTarget);
@@ -322,79 +326,95 @@ export default function ModeratorDashboardPage() {
         </Typography>
       </Box>
 
-      {/* Quick Stats */}
-      <Box
-        sx={{
-          display: 'flex',
-          gap: 2,
-          p: 2,
-          borderBottom: '1px solid #2f3336',
-          overflowX: 'auto',
-        }}
-      >
-        <Box
-          sx={{
-            bgcolor: '#16181c',
-            borderRadius: 2,
-            p: 2,
-            minWidth: 140,
-            textAlign: 'center',
-          }}
-        >
-          <Typography sx={{ fontSize: '1.5rem', fontWeight: 700, color: '#FF9800' }}>
-            8
-          </Typography>
-          <Typography sx={{ fontSize: '0.75rem', color: '#71767b' }}>
-            Pending Concerns
-          </Typography>
-        </Box>
-        <Box
-          sx={{
-            bgcolor: '#16181c',
-            borderRadius: 2,
-            p: 2,
-            minWidth: 140,
-            textAlign: 'center',
-          }}
-        >
-          <Typography sx={{ fontSize: '1.5rem', fontWeight: 700, color: '#F44336' }}>
-            5
-          </Typography>
-          <Typography sx={{ fontSize: '0.75rem', color: '#71767b' }}>
-            Flagged Content
-          </Typography>
-        </Box>
-        <Box
-          sx={{
-            bgcolor: '#16181c',
-            borderRadius: 2,
-            p: 2,
-            minWidth: 140,
-            textAlign: 'center',
-          }}
-        >
-          <Typography sx={{ fontSize: '1.5rem', fontWeight: 700, color: '#2196F3' }}>
-            3
-          </Typography>
-          <Typography sx={{ fontSize: '0.75rem', color: '#71767b' }}>
-            New Suggestions
-          </Typography>
-        </Box>
-        <Box
-          sx={{
-            bgcolor: '#16181c',
-            borderRadius: 2,
-            p: 2,
-            minWidth: 140,
-            textAlign: 'center',
-          }}
-        >
-          <Typography sx={{ fontSize: '1.5rem', fontWeight: 700, color: '#4CAF50' }}>
-            24
-          </Typography>
-          <Typography sx={{ fontSize: '0.75rem', color: '#71767b' }}>
-            Resolved Today
-          </Typography>
+      {/* Compose Post */}
+      <Box sx={{ p: 2, borderBottom: '1px solid #2f3336' }}>
+        <Box sx={{ display: 'flex', gap: 1.5 }}>
+          <Avatar
+            sx={{
+              width: 40,
+              height: 40,
+              bgcolor: '#228B22',
+              fontSize: '1rem',
+              fontWeight: 600,
+            }}
+          >
+            M
+          </Avatar>
+          <Box sx={{ flex: 1 }}>
+            <TextField
+              fullWidth
+              multiline
+              placeholder="Share an update with the community..."
+              value={newPostText}
+              onChange={(e) => setNewPostText(e.target.value)}
+              variant="standard"
+              InputProps={{
+                disableUnderline: true,
+                sx: {
+                  color: '#e7e9ea',
+                  fontSize: '1.25rem',
+                  '&::placeholder': {
+                    color: '#71767b',
+                  },
+                },
+              }}
+              sx={{
+                '& .MuiInputBase-input::placeholder': {
+                  color: '#71767b',
+                  opacity: 1,
+                },
+              }}
+            />
+            <Box
+              sx={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                mt: 2,
+                pt: 1.5,
+                borderTop: '1px solid #2f3336',
+              }}
+            >
+              <Box sx={{ display: 'flex', gap: 0.5, ml: -1 }}>
+                <IconButton size="small" sx={{ color: '#228B22' }}>
+                  <ImageOutlinedIcon fontSize="small" />
+                </IconButton>
+                <IconButton size="small" sx={{ color: '#228B22' }}>
+                  <GifBoxOutlinedIcon fontSize="small" />
+                </IconButton>
+                <IconButton size="small" sx={{ color: '#228B22' }}>
+                  <PollOutlinedIcon fontSize="small" />
+                </IconButton>
+                <IconButton size="small" sx={{ color: '#228B22' }}>
+                  <EmojiEmotionsOutlinedIcon fontSize="small" />
+                </IconButton>
+                <IconButton size="small" sx={{ color: '#228B22' }}>
+                  <LocationOnOutlinedIcon fontSize="small" />
+                </IconButton>
+              </Box>
+              <Button
+                variant="contained"
+                disabled={!newPostText.trim()}
+                sx={{
+                  bgcolor: '#228B22',
+                  color: 'white',
+                  borderRadius: 5,
+                  textTransform: 'none',
+                  fontWeight: 700,
+                  px: 2.5,
+                  '&:hover': {
+                    bgcolor: '#1a6b1a',
+                  },
+                  '&.Mui-disabled': {
+                    bgcolor: 'rgba(34, 139, 34, 0.5)',
+                    color: 'rgba(255, 255, 255, 0.5)',
+                  },
+                }}
+              >
+                Post
+              </Button>
+            </Box>
+          </Box>
         </Box>
       </Box>
 

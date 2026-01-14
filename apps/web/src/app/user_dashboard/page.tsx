@@ -7,9 +7,6 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import TextField from '@mui/material/TextField';
-import InputAdornment from '@mui/material/InputAdornment';
-import Card from '@mui/material/Card';
-import SearchIcon from '@mui/icons-material/Search';
 import ImageOutlinedIcon from '@mui/icons-material/ImageOutlined';
 import GifBoxOutlinedIcon from '@mui/icons-material/GifBoxOutlined';
 import PollOutlinedIcon from '@mui/icons-material/PollOutlined';
@@ -140,15 +137,6 @@ const initialPosts = [
   },
 ];
 
-// Trending topics
-const trendingTopics = [
-  { category: 'Trending in U.P. Campus', topic: 'Christmas Party', posts: '2,779 posts' },
-  { category: 'Trending in U.P. Campus', topic: 'Road Closure', posts: '1,234 posts' },
-  { category: 'Trending in U.P. Campus', topic: 'Area 3 Water', posts: '856 posts' },
-  { category: 'Community', topic: 'Barangay Clearance', posts: '445 posts' },
-  { category: 'Community', topic: '#UPDiliman', posts: '6,889 posts' },
-];
-
 const formatNumber = (num: number): string => {
   if (num >= 1000000) return (num / 1000000).toFixed(1) + 'M';
   if (num >= 1000) return (num / 1000).toFixed(1) + 'K';
@@ -204,20 +192,12 @@ export default function UserDashboardPage() {
   };
 
   return (
-    <Box sx={{ display: 'flex' }}>
-      {/* Main Feed */}
+    <Box>
+      {/* Header */}
       <Box
         sx={{
-          flex: 1,
-          maxWidth: 600,
-          borderRight: '1px solid #2f3336',
-        }}
-      >
-        {/* Header */}
-        <Box
-          sx={{
-            position: 'sticky',
-            top: 0,
+          position: 'sticky',
+          top: 0,
             bgcolor: 'rgba(0, 0, 0, 0.65)',
             backdropFilter: 'blur(12px)',
             zIndex: 10,
@@ -515,268 +495,6 @@ export default function UserDashboardPage() {
             </Box>
           </Box>
         ))}
-      </Box>
-
-      {/* Right Sidebar */}
-      <Box
-        sx={{
-          width: 350,
-          flexShrink: 0,
-          display: { xs: 'none', lg: 'block' },
-          ml: 4,
-        }}
-      >
-        {/* Sticky Search */}
-        <Box
-          sx={{
-            position: 'sticky',
-            top: 0,
-            bgcolor: '#000',
-            pt: 1,
-            pb: 1,
-            zIndex: 10,
-          }}
-        >
-          <TextField
-            fullWidth
-            size="small"
-            placeholder="Search"
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <SearchIcon sx={{ color: '#71767b' }} />
-                </InputAdornment>
-              ),
-            }}
-            sx={{
-              '& .MuiOutlinedInput-root': {
-                borderRadius: 5,
-                bgcolor: '#202327',
-                '& fieldset': {
-                  borderColor: 'transparent',
-                },
-                '&:hover fieldset': {
-                  borderColor: 'transparent',
-                },
-                '&.Mui-focused fieldset': {
-                  borderColor: '#7B1113',
-                },
-                '& input': {
-                  color: '#e7e9ea',
-                  '&::placeholder': {
-                    color: '#71767b',
-                    opacity: 1,
-                  },
-                },
-              },
-            }}
-          />
-        </Box>
-
-        {/* Scrollable Content */}
-        <Box sx={{ pt: 1 }}>
-        {/* Latest Announcement */}
-        <Card
-          sx={{
-            bgcolor: '#16181c',
-            borderRadius: 3,
-            mb: 2,
-            overflow: 'hidden',
-            border: '1px solid #2f3336',
-          }}
-        >
-          <Box sx={{ p: 2, pb: 1 }}>
-            <Typography sx={{ fontWeight: 700, fontSize: '1.25rem', color: '#e7e9ea' }}>
-              Latest Announcement
-            </Typography>
-          </Box>
-          {[
-            { title: 'Community Christmas Party Announcement', time: '18 hours ago', category: 'Community' },
-            { title: 'Road Repair Schedule Released', time: '1 hour ago', category: 'Infrastructure' },
-            { title: 'Water Service Update for Area 3', time: '5 hours ago', category: 'Utilities' },
-          ].map((news, index) => (
-            <Box
-              key={index}
-              sx={{
-                px: 2,
-                py: 1.5,
-                cursor: 'pointer',
-                '&:hover': {
-                  bgcolor: 'rgba(231, 233, 234, 0.03)',
-                },
-              }}
-            >
-              <Typography sx={{ fontSize: '0.8125rem', color: '#71767b' }}>
-                {news.category} · {news.time}
-              </Typography>
-              <Typography sx={{ fontWeight: 700, fontSize: '0.9375rem', color: '#e7e9ea' }}>
-                {news.title}
-              </Typography>
-            </Box>
-          ))}
-        </Card>
-
-        {/* What's Happening */}
-        <Card
-          sx={{
-            bgcolor: '#16181c',
-            borderRadius: 3,
-            mb: 2,
-            overflow: 'hidden',
-            border: '1px solid #2f3336',
-          }}
-        >
-          <Box sx={{ p: 2, pb: 1 }}>
-            <Typography sx={{ fontWeight: 700, fontSize: '1.25rem', color: '#e7e9ea' }}>
-              What&apos;s happening
-            </Typography>
-          </Box>
-          {trendingTopics.map((item, index) => (
-            <Box
-              key={index}
-              sx={{
-                px: 2,
-                py: 1.5,
-                cursor: 'pointer',
-                '&:hover': {
-                  bgcolor: 'rgba(231, 233, 234, 0.03)',
-                },
-              }}
-            >
-              <Typography sx={{ fontSize: '0.8125rem', color: '#71767b' }}>
-                {item.category}
-              </Typography>
-              <Typography sx={{ fontWeight: 700, fontSize: '0.9375rem', color: '#e7e9ea' }}>
-                {item.topic}
-              </Typography>
-              <Typography sx={{ fontSize: '0.8125rem', color: '#71767b' }}>
-                {item.posts}
-              </Typography>
-            </Box>
-          ))}
-          <Box
-            sx={{
-              px: 2,
-              py: 1.5,
-              cursor: 'pointer',
-              '&:hover': {
-                bgcolor: 'rgba(231, 233, 234, 0.03)',
-              },
-            }}
-          >
-            <Typography sx={{ color: '#7B1113', fontSize: '0.9375rem' }}>
-              Show more
-            </Typography>
-          </Box>
-        </Card>
-
-        {/* Latest Concerns */}
-        <Card
-          sx={{
-            bgcolor: '#16181c',
-            borderRadius: 3,
-            overflow: 'hidden',
-            border: '1px solid #2f3336',
-          }}
-        >
-          <Box sx={{ p: 2, pb: 1 }}>
-            <Typography sx={{ fontWeight: 700, fontSize: '1.25rem', color: '#e7e9ea' }}>
-              Latest Concerns
-            </Typography>
-          </Box>
-          {[
-            {
-              id: 1,
-              title: 'Streetlight not working on Area 5',
-              author: 'Maria Santos',
-              status: 'open',
-              time: '2 hours ago',
-              category: 'Infrastructure',
-            },
-            {
-              id: 2,
-              title: 'Noise complaint from construction site',
-              author: 'Juan Dela Cruz',
-              status: 'in_progress',
-              time: '5 hours ago',
-              category: 'Environment',
-            },
-            {
-              id: 3,
-              title: 'Request for speed bump installation',
-              author: 'Pedro Reyes',
-              status: 'open',
-              time: '1 day ago',
-              category: 'Safety',
-            },
-          ].map((concern) => (
-            <Box
-              key={concern.id}
-              sx={{
-                px: 2,
-                py: 1.5,
-                cursor: 'pointer',
-                borderTop: '1px solid #2f3336',
-                '&:hover': {
-                  bgcolor: 'rgba(231, 233, 234, 0.03)',
-                },
-              }}
-            >
-              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 0.5 }}>
-                <Typography sx={{ fontSize: '0.75rem', color: '#71767b' }}>
-                  {concern.category}
-                </Typography>
-                <Box
-                  sx={{
-                    px: 1,
-                    py: 0.25,
-                    borderRadius: 1,
-                    bgcolor: concern.status === 'open' ? 'rgba(255, 193, 7, 0.2)' : 'rgba(33, 150, 243, 0.2)',
-                    color: concern.status === 'open' ? '#ffc107' : '#2196f3',
-                    fontSize: '0.6875rem',
-                    fontWeight: 600,
-                    textTransform: 'uppercase',
-                  }}
-                >
-                  {concern.status === 'open' ? 'Open' : 'In Progress'}
-                </Box>
-              </Box>
-              <Typography
-                sx={{
-                  fontWeight: 600,
-                  fontSize: '0.875rem',
-                  color: '#e7e9ea',
-                  mb: 0.5,
-                  overflow: 'hidden',
-                  textOverflow: 'ellipsis',
-                  whiteSpace: 'nowrap',
-                }}
-              >
-                {concern.title}
-              </Typography>
-              <Typography sx={{ fontSize: '0.75rem', color: '#71767b' }}>
-                by {concern.author} · {concern.time}
-              </Typography>
-            </Box>
-          ))}
-          <Box
-            sx={{
-              px: 2,
-              py: 1.5,
-              cursor: 'pointer',
-              borderTop: '1px solid #2f3336',
-              '&:hover': {
-                bgcolor: 'rgba(231, 233, 234, 0.03)',
-              },
-            }}
-          >
-            <Typography sx={{ color: '#7B1113', fontSize: '0.9375rem' }}>
-              View all concerns
-            </Typography>
-          </Box>
-        </Card>
-        </Box>
-      </Box>
     </Box>
   );
 }

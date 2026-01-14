@@ -7,7 +7,6 @@ import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import SettingsIcon from '@mui/icons-material/Settings';
 import CampaignIcon from '@mui/icons-material/Campaign';
 import ReportProblemIcon from '@mui/icons-material/ReportProblem';
@@ -17,7 +16,6 @@ import ChatBubbleIcon from '@mui/icons-material/ChatBubble';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import InfoIcon from '@mui/icons-material/Info';
 import VerifiedIcon from '@mui/icons-material/Verified';
-import { useRouter } from 'next/navigation';
 
 interface Notification {
   id: number;
@@ -165,7 +163,6 @@ const getNotificationIcon = (type: string) => {
 };
 
 export default function NotificationsPage() {
-  const router = useRouter();
   const [activeTab, setActiveTab] = useState(0);
   const [notifications, setNotifications] = useState(initialNotifications);
 
@@ -200,49 +197,29 @@ export default function NotificationsPage() {
   const unreadCount = notifications.filter((n) => !n.isRead).length;
 
   return (
-    <Box sx={{ display: 'flex' }}>
-      {/* Main Content */}
+    <Box>
+      {/* Header */}
       <Box
         sx={{
-          flex: 1,
-          maxWidth: 600,
-          borderRight: '1px solid #2f3336',
+          position: 'sticky',
+          top: 0,
+          bgcolor: 'rgba(0, 0, 0, 0.65)',
+          backdropFilter: 'blur(12px)',
+          zIndex: 10,
+          borderBottom: '1px solid #2f3336',
         }}
       >
-        {/* Header */}
         <Box
           sx={{
-            position: 'sticky',
-            top: 0,
-            bgcolor: 'rgba(0, 0, 0, 0.65)',
-            backdropFilter: 'blur(12px)',
-            zIndex: 10,
-            borderBottom: '1px solid #2f3336',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            px: 2,
+            py: 1.5,
           }}
         >
-          <Box
-            sx={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-              px: 2,
-              py: 1,
-            }}
-          >
-            <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-              <IconButton
-                onClick={() => router.back()}
-                sx={{
-                  color: '#e7e9ea',
-                  '&:hover': {
-                    bgcolor: 'rgba(231, 233, 234, 0.1)',
-                  },
-                }}
-              >
-                <ArrowBackIcon />
-              </IconButton>
-              <Typography
-                variant="h6"
+            <Typography
+              variant="h6"
                 sx={{
                   fontWeight: 700,
                   color: '#e7e9ea',
@@ -251,7 +228,6 @@ export default function NotificationsPage() {
               >
                 Notifications
               </Typography>
-            </Box>
             <IconButton
               sx={{
                 color: '#e7e9ea',
@@ -463,119 +439,6 @@ export default function NotificationsPage() {
             </Typography>
           </Box>
         )}
-      </Box>
-
-      {/* Right Sidebar */}
-      <Box
-        sx={{
-          width: 350,
-          flexShrink: 0,
-          display: { xs: 'none', lg: 'block' },
-          ml: 4,
-        }}
-      >
-        {/* Notification Settings Card */}
-        <Box sx={{ p: 2 }}>
-          <Box
-            sx={{
-              bgcolor: '#16181c',
-              borderRadius: 3,
-              p: 2,
-              border: '1px solid #2f3336',
-            }}
-          >
-            <Typography sx={{ fontWeight: 700, fontSize: '1.25rem', color: '#e7e9ea', mb: 2 }}>
-              Notification Preferences
-            </Typography>
-            <Typography sx={{ fontSize: '0.875rem', color: '#71767b', mb: 2, lineHeight: 1.5 }}>
-              Customize what notifications you receive and how you receive them.
-            </Typography>
-            {[
-              { label: 'Announcements', enabled: true },
-              { label: 'Concern Updates', enabled: true },
-              { label: 'Comments & Replies', enabled: true },
-              { label: 'Suggestion Votes', enabled: false },
-            ].map((pref, index) => (
-              <Box
-                key={index}
-                sx={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'space-between',
-                  py: 1,
-                  borderBottom: index < 3 ? '1px solid #2f3336' : 'none',
-                }}
-              >
-                <Typography sx={{ fontSize: '0.875rem', color: '#e7e9ea' }}>
-                  {pref.label}
-                </Typography>
-                <Box
-                  sx={{
-                    width: 36,
-                    height: 20,
-                    borderRadius: 10,
-                    bgcolor: pref.enabled ? '#7B1113' : '#333',
-                    position: 'relative',
-                    cursor: 'pointer',
-                  }}
-                >
-                  <Box
-                    sx={{
-                      width: 16,
-                      height: 16,
-                      borderRadius: '50%',
-                      bgcolor: '#fff',
-                      position: 'absolute',
-                      top: 2,
-                      left: pref.enabled ? 18 : 2,
-                      transition: 'left 0.2s',
-                    }}
-                  />
-                </Box>
-              </Box>
-            ))}
-          </Box>
-        </Box>
-
-        {/* Quick Stats */}
-        <Box sx={{ px: 2 }}>
-          <Box
-            sx={{
-              bgcolor: '#16181c',
-              borderRadius: 3,
-              p: 2,
-              border: '1px solid #2f3336',
-            }}
-          >
-            <Typography sx={{ fontWeight: 700, fontSize: '1.25rem', color: '#e7e9ea', mb: 2 }}>
-              This Week
-            </Typography>
-            {[
-              { label: 'New Announcements', count: 3 },
-              { label: 'Concern Updates', count: 2 },
-              { label: 'New Likes', count: 12 },
-              { label: 'New Comments', count: 5 },
-            ].map((stat, index) => (
-              <Box
-                key={index}
-                sx={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'space-between',
-                  py: 1,
-                }}
-              >
-                <Typography sx={{ fontSize: '0.875rem', color: '#71767b' }}>
-                  {stat.label}
-                </Typography>
-                <Typography sx={{ fontSize: '0.875rem', color: '#e7e9ea', fontWeight: 600 }}>
-                  {stat.count}
-                </Typography>
-              </Box>
-            ))}
-          </Box>
-        </Box>
-      </Box>
     </Box>
   );
 }

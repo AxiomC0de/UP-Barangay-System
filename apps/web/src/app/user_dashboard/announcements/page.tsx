@@ -4,15 +4,9 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
-import TextField from '@mui/material/TextField';
-import InputAdornment from '@mui/material/InputAdornment';
-import Card from '@mui/material/Card';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import SearchIcon from '@mui/icons-material/Search';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import VerifiedIcon from '@mui/icons-material/Verified';
 import PushPinIcon from '@mui/icons-material/PushPin';
-import { useRouter } from 'next/navigation';
 
 const announcements = [
   {
@@ -89,59 +83,38 @@ const formatNumber = (num: number): string => {
 };
 
 export default function AnnouncementsPage() {
-  const router = useRouter();
-
   return (
-    <Box sx={{ display: 'flex' }}>
-      {/* Main Content */}
+    <Box>
+      {/* Header */}
       <Box
         sx={{
-          flex: 1,
-          maxWidth: 600,
-          borderRight: '1px solid #2f3336',
+          position: 'sticky',
+          top: 0,
+          bgcolor: 'rgba(0, 0, 0, 0.65)',
+          backdropFilter: 'blur(12px)',
+          zIndex: 10,
+          borderBottom: '1px solid #2f3336',
+          display: 'flex',
+          alignItems: 'center',
+          gap: 2,
+          px: 2,
+          py: 1.5,
         }}
       >
-        {/* Header */}
-        <Box
+        <Typography
+          variant="h6"
           sx={{
-            position: 'sticky',
-            top: 0,
-            bgcolor: 'rgba(0, 0, 0, 0.65)',
-            backdropFilter: 'blur(12px)',
-            zIndex: 10,
-            borderBottom: '1px solid #2f3336',
-            display: 'flex',
-            alignItems: 'center',
-            gap: 2,
-            px: 2,
-            py: 1,
+            fontWeight: 700,
+            color: '#e7e9ea',
+            fontSize: '1.25rem',
           }}
         >
-          <IconButton
-            onClick={() => router.back()}
-            sx={{
-              color: '#e7e9ea',
-              '&:hover': {
-                bgcolor: 'rgba(231, 233, 234, 0.1)',
-              },
-            }}
-          >
-            <ArrowBackIcon />
-          </IconButton>
-          <Typography
-            variant="h6"
-            sx={{
-              fontWeight: 700,
-              color: '#e7e9ea',
-              fontSize: '1.25rem',
-            }}
-          >
-            Announcements
-          </Typography>
-        </Box>
+          Announcements
+        </Typography>
+      </Box>
 
-        {/* Announcements List */}
-        {announcements.map((announcement) => (
+      {/* Announcements List */}
+      {announcements.map((announcement) => (
           <Box
             key={announcement.id}
             sx={{
@@ -253,112 +226,6 @@ export default function AnnouncementsPage() {
             </Box>
           </Box>
         ))}
-      </Box>
-
-      {/* Right Sidebar */}
-      <Box
-        sx={{
-          width: 350,
-          flexShrink: 0,
-          display: { xs: 'none', lg: 'block' },
-        }}
-      >
-        {/* Sticky Search */}
-        <Box
-          sx={{
-            position: 'sticky',
-            top: 0,
-            bgcolor: '#000',
-            pt: 2,
-            pb: 1,
-            px: 2,
-            zIndex: 10,
-          }}
-        >
-          <TextField
-            fullWidth
-            size="small"
-            placeholder="Search announcements"
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <SearchIcon sx={{ color: '#71767b' }} />
-                </InputAdornment>
-              ),
-            }}
-            sx={{
-            '& .MuiOutlinedInput-root': {
-              borderRadius: 5,
-              bgcolor: '#202327',
-              '& fieldset': {
-                borderColor: 'transparent',
-              },
-              '&:hover fieldset': {
-                borderColor: 'transparent',
-              },
-              '&.Mui-focused fieldset': {
-                borderColor: '#7B1113',
-              },
-              '& input': {
-                color: '#e7e9ea',
-                '&::placeholder': {
-                  color: '#71767b',
-                  opacity: 1,
-                },
-              },
-            },
-          }}
-        />
-        </Box>
-
-        {/* Scrollable Content */}
-        <Box sx={{ px: 2 }}>
-        {/* Categories */}
-        <Card
-          sx={{
-            bgcolor: '#16181c',
-            borderRadius: 3,
-            overflow: 'hidden',
-            border: '1px solid #2f3336',
-          }}
-        >
-          <Box sx={{ p: 2, pb: 1 }}>
-            <Typography sx={{ fontWeight: 700, fontSize: '1.25rem', color: '#e7e9ea' }}>
-              Categories
-            </Typography>
-          </Box>
-          {[
-            { name: 'All Announcements', count: 45 },
-            { name: 'Events', count: 12 },
-            { name: 'Advisories', count: 18 },
-            { name: 'Services', count: 8 },
-            { name: 'Community', count: 7 },
-          ].map((category, index) => (
-            <Box
-              key={index}
-              sx={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                px: 2,
-                py: 1.5,
-                cursor: 'pointer',
-                '&:hover': {
-                  bgcolor: 'rgba(231, 233, 234, 0.03)',
-                },
-              }}
-            >
-              <Typography sx={{ fontSize: '0.9375rem', color: '#e7e9ea' }}>
-                {category.name}
-              </Typography>
-              <Typography sx={{ fontSize: '0.875rem', color: '#71767b' }}>
-                {category.count}
-              </Typography>
-            </Box>
-          ))}
-        </Card>
-        </Box>
-      </Box>
     </Box>
   );
 }

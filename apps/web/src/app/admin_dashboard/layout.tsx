@@ -156,6 +156,7 @@ export default function AdminDashboardLayout({
     <Box
       sx={{
         minHeight: '100vh',
+        width: '100%',
         bgcolor: '#000',
         color: '#e7e9ea',
       }}
@@ -163,10 +164,10 @@ export default function AdminDashboardLayout({
       {/* Centered Container */}
       <Box
         sx={{
-          maxWidth: 1300,
+          width: '100%',
+          maxWidth: 3840,
           mx: 'auto',
           display: 'flex',
-          pl: { lg: '37px' },
         }}
       >
         {/* Left Sidebar - Navigation */}
@@ -184,29 +185,45 @@ export default function AdminDashboardLayout({
           }}
         >
           {/* Logo */}
-          <Box sx={{ pl: 1, pr: 1.5, py: 1.5, mb: 1 }}>
-            <IconButton
-              onClick={() => router.push('/admin_dashboard')}
+          <Box
+            onClick={() => router.push('/admin_dashboard')}
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: 1.5,
+              pl: 1,
+              pr: 1.5,
+              pt: 3,
+              pb: 1.5,
+              mb: 1,
+              cursor: 'pointer',
+              borderRadius: 7.5,
+              '&:hover': {
+                bgcolor: 'rgba(123, 17, 19, 0.1)',
+              },
+            }}
+          >
+            <Box
+              component="img"
+              src="/images/logo.jpg"
+              alt="Barangay U.P. Campus"
               sx={{
+                width: 40,
+                height: 40,
+                borderRadius: '50%',
+                objectFit: 'cover',
+              }}
+            />
+            <Typography
+              sx={{
+                fontWeight: 700,
+                fontSize: '1rem',
                 color: '#e7e9ea',
-                p: 0,
-                '&:hover': {
-                  bgcolor: 'rgba(123, 17, 19, 0.1)',
-                },
+                whiteSpace: 'nowrap',
               }}
             >
-              <Box
-                component="img"
-                src="/images/logo.jpg"
-                alt="Barangay U.P. Campus"
-                sx={{
-                  width: 40,
-                  height: 40,
-                  borderRadius: '50%',
-                  objectFit: 'cover',
-                }}
-              />
-            </IconButton>
+              Barangay U.P. Campus
+            </Typography>
           </Box>
 
           {/* Admin Badge */}
@@ -324,56 +341,59 @@ export default function AdminDashboardLayout({
             </ListItem>
           </List>
 
-          {/* User Account */}
-          <Box sx={{ p: 1.5, mt: 'auto' }}>
-            <Box
-              onClick={handleMenuOpen}
+          {/* User Profile */}
+          <Box
+            onClick={handleMenuOpen}
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: 1.5,
+              p: 1.5,
+              mb: 1.5,
+              borderRadius: 7.5,
+              cursor: 'pointer',
+              '&:hover': {
+                bgcolor: 'rgba(231, 233, 234, 0.1)',
+              },
+            }}
+          >
+            <Avatar
               sx={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: 1.5,
-                p: 1.5,
-                borderRadius: 7.5,
-                cursor: 'pointer',
-                '&:hover': {
-                  bgcolor: 'rgba(231, 233, 234, 0.1)',
-                },
+                width: 40,
+                height: 40,
+                bgcolor: '#7B1113',
+                fontSize: '1rem',
+                fontWeight: 600,
               }}
             >
-              <Avatar
+              A
+            </Avatar>
+            <Box sx={{ flex: 1, minWidth: 0 }}>
+              <Typography
                 sx={{
-                  width: 40,
-                  height: 40,
-                  bgcolor: '#7B1113',
-                  fontSize: '1rem',
                   fontWeight: 700,
+                  fontSize: '0.9375rem',
+                  color: '#e7e9ea',
+                  overflow: 'hidden',
+                  textOverflow: 'ellipsis',
+                  whiteSpace: 'nowrap',
                 }}
               >
-                A
-              </Avatar>
-              <Box sx={{ flex: 1, minWidth: 0 }}>
-                <Typography
-                  sx={{
-                    fontWeight: 700,
-                    fontSize: '0.938rem',
-                    color: '#e7e9ea',
-                    lineHeight: 1.2,
-                  }}
-                >
-                  Admin User
-                </Typography>
-                <Typography
-                  sx={{
-                    fontSize: '0.875rem',
-                    color: '#71767b',
-                    lineHeight: 1.2,
-                  }}
-                >
-                  @admin
-                </Typography>
-              </Box>
-              <MoreHorizIcon sx={{ color: '#e7e9ea', fontSize: 18 }} />
+                Admin User
+              </Typography>
+              <Typography
+                sx={{
+                  fontSize: '0.9375rem',
+                  color: '#71767b',
+                  overflow: 'hidden',
+                  textOverflow: 'ellipsis',
+                  whiteSpace: 'nowrap',
+                }}
+              >
+                @admin
+              </Typography>
             </Box>
+            <MoreHorizIcon sx={{ color: '#e7e9ea' }} />
           </Box>
 
           {/* Account Menu */}
@@ -423,8 +443,8 @@ export default function AdminDashboardLayout({
           sx={{
             flex: 1,
             minHeight: '100vh',
-            borderRight: { lg: '1px solid #2f3336' },
-            maxWidth: { xs: '100%', md: 900 },
+            minWidth: 0,
+            pt: 3,
           }}
         >
           {children}

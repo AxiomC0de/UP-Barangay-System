@@ -12,7 +12,6 @@ import Card from '@mui/material/Card';
 import Chip from '@mui/material/Chip';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import SearchIcon from '@mui/icons-material/Search';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
@@ -21,7 +20,6 @@ import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import ThumbDownOutlinedIcon from '@mui/icons-material/ThumbDownOutlined';
 import ThumbDownIcon from '@mui/icons-material/ThumbDown';
 import AddIcon from '@mui/icons-material/Add';
-import { useRouter } from 'next/navigation';
 
 const initialSuggestions = [
   {
@@ -123,7 +121,6 @@ const initialSuggestions = [
 ];
 
 export default function SuggestionsPage() {
-  const router = useRouter();
   const [activeTab, setActiveTab] = useState(0);
   const [suggestions, setSuggestions] = useState(initialSuggestions);
 
@@ -182,46 +179,27 @@ export default function SuggestionsPage() {
     });
 
   return (
-    <Box sx={{ display: 'flex' }}>
-      {/* Main Content */}
+    <Box>
+      {/* Header */}
       <Box
         sx={{
-          flex: 1,
-          maxWidth: 600,
-          borderRight: '1px solid #2f3336',
+          position: 'sticky',
+          top: 0,
+          bgcolor: 'rgba(0, 0, 0, 0.65)',
+          backdropFilter: 'blur(12px)',
+          zIndex: 10,
+          borderBottom: '1px solid #2f3336',
         }}
       >
-        {/* Header */}
         <Box
           sx={{
-            position: 'sticky',
-            top: 0,
-            bgcolor: 'rgba(0, 0, 0, 0.65)',
-            backdropFilter: 'blur(12px)',
-            zIndex: 10,
-            borderBottom: '1px solid #2f3336',
+            display: 'flex',
+            alignItems: 'center',
+            gap: 2,
+            px: 2,
+            py: 1.5,
           }}
         >
-          <Box
-            sx={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: 2,
-              px: 2,
-              py: 1,
-            }}
-          >
-            <IconButton
-              onClick={() => router.back()}
-              sx={{
-                color: '#e7e9ea',
-                '&:hover': {
-                  bgcolor: 'rgba(231, 233, 234, 0.1)',
-                },
-              }}
-            >
-              <ArrowBackIcon />
-            </IconButton>
             <Typography
               variant="h6"
               sx={{
@@ -481,145 +459,6 @@ export default function SuggestionsPage() {
             </Box>
           </Box>
         ))}
-      </Box>
-
-      {/* Right Sidebar */}
-      <Box
-        sx={{
-          width: 350,
-          flexShrink: 0,
-          display: { xs: 'none', lg: 'block' },
-        }}
-      >
-        {/* Sticky Search */}
-        <Box
-          sx={{
-            position: 'sticky',
-            top: 0,
-            bgcolor: '#000',
-            pt: 2,
-            pb: 1,
-            px: 2,
-            zIndex: 10,
-          }}
-        >
-          <TextField
-            fullWidth
-            size="small"
-            placeholder="Search suggestions"
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <SearchIcon sx={{ color: '#71767b' }} />
-                </InputAdornment>
-              ),
-            }}
-            sx={{
-            '& .MuiOutlinedInput-root': {
-              borderRadius: 5,
-              bgcolor: '#202327',
-              '& fieldset': {
-                borderColor: 'transparent',
-              },
-              '&:hover fieldset': {
-                borderColor: 'transparent',
-              },
-              '&.Mui-focused fieldset': {
-                borderColor: '#7B1113',
-              },
-              '& input': {
-                color: '#e7e9ea',
-                '&::placeholder': {
-                  color: '#71767b',
-                  opacity: 1,
-                },
-              },
-            },
-          }}
-        />
-        </Box>
-
-        {/* Scrollable Content */}
-        <Box sx={{ px: 2 }}>
-        {/* Top Categories */}
-        <Card
-          sx={{
-            bgcolor: '#16181c',
-            borderRadius: 3,
-            mb: 2,
-            overflow: 'hidden',
-            border: '1px solid #2f3336',
-          }}
-        >
-          <Box sx={{ p: 2, pb: 1 }}>
-            <Typography sx={{ fontWeight: 700, fontSize: '1.25rem', color: '#e7e9ea' }}>
-              Top Categories
-            </Typography>
-          </Box>
-          {[
-            { name: 'Environment', count: 45, color: '#4CAF50' },
-            { name: 'Community', count: 38, color: '#2196F3' },
-            { name: 'Technology', count: 32, color: '#9C27B0' },
-            { name: 'Health', count: 28, color: '#F44336' },
-            { name: 'Education', count: 24, color: '#FF9800' },
-            { name: 'Sanitation', count: 18, color: '#795548' },
-          ].map((category, index) => (
-            <Box
-              key={index}
-              sx={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                px: 2,
-                py: 1.5,
-                cursor: 'pointer',
-                '&:hover': {
-                  bgcolor: 'rgba(231, 233, 234, 0.03)',
-                },
-              }}
-            >
-              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                <Box
-                  sx={{
-                    width: 8,
-                    height: 8,
-                    borderRadius: '50%',
-                    bgcolor: category.color,
-                  }}
-                />
-                <Typography sx={{ fontSize: '0.9375rem', color: '#e7e9ea' }}>
-                  {category.name}
-                </Typography>
-              </Box>
-              <Typography sx={{ fontSize: '0.875rem', color: '#71767b' }}>
-                {category.count}
-              </Typography>
-            </Box>
-          ))}
-        </Card>
-
-        {/* Guidelines */}
-        <Card
-          sx={{
-            bgcolor: '#16181c',
-            borderRadius: 3,
-            p: 2,
-            border: '1px solid #2f3336',
-          }}
-        >
-          <Typography sx={{ fontWeight: 700, fontSize: '1rem', color: '#e7e9ea', mb: 1.5 }}>
-            Suggestion Guidelines
-          </Typography>
-          <Typography sx={{ fontSize: '0.875rem', color: '#71767b', lineHeight: 1.6 }}>
-            • Be specific and constructive{'\n'}
-            • Check for similar suggestions{'\n'}
-            • Provide context and reasoning{'\n'}
-            • Stay respectful and positive{'\n'}
-            • Upvote existing suggestions you support
-          </Typography>
-        </Card>
-        </Box>
-      </Box>
     </Box>
   );
 }

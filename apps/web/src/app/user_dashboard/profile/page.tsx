@@ -8,9 +8,7 @@ import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
-import Card from '@mui/material/Card';
 import Chip from '@mui/material/Chip';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import EditIcon from '@mui/icons-material/Edit';
@@ -21,8 +19,6 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import BarChartIcon from '@mui/icons-material/BarChart';
 import ReportProblemIcon from '@mui/icons-material/ReportProblem';
 import LightbulbIcon from '@mui/icons-material/Lightbulb';
-import CampaignIcon from '@mui/icons-material/Campaign';
-import { useRouter } from 'next/navigation';
 
 // Mock user data
 const userData = {
@@ -136,7 +132,6 @@ const getStatusColor = (status: string) => {
 };
 
 export default function ProfilePage() {
-  const router = useRouter();
   const [activeTab, setActiveTab] = useState(0);
   const [posts, setPosts] = useState(userPosts);
 
@@ -162,15 +157,7 @@ export default function ProfilePage() {
   };
 
   return (
-    <Box sx={{ display: 'flex' }}>
-      {/* Main Content */}
-      <Box
-        sx={{
-          flex: 1,
-          maxWidth: 600,
-          borderRight: '1px solid #2f3336',
-        }}
-      >
+    <Box>
         {/* Header */}
         <Box
           sx={{
@@ -188,20 +175,9 @@ export default function ProfilePage() {
               alignItems: 'center',
               gap: 2,
               px: 2,
-              py: 1,
+              py: 1.5,
             }}
           >
-            <IconButton
-              onClick={() => router.back()}
-              sx={{
-                color: '#e7e9ea',
-                '&:hover': {
-                  bgcolor: 'rgba(231, 233, 234, 0.1)',
-                },
-              }}
-            >
-              <ArrowBackIcon />
-            </IconButton>
             <Box>
               <Typography
                 variant="h6"
@@ -637,153 +613,6 @@ export default function ProfilePage() {
             </Typography>
           </Box>
         )}
-      </Box>
-
-      {/* Right Sidebar */}
-      <Box
-        sx={{
-          width: 350,
-          flexShrink: 0,
-          display: { xs: 'none', lg: 'block' },
-          ml: 2,
-        }}
-      >
-        {/* Sticky Search Bar */}
-        <Box
-          sx={{
-            position: 'sticky',
-            top: 0,
-            bgcolor: '#000',
-            zIndex: 100,
-            py: 1,
-            px: 2,
-          }}
-        >
-          <Box
-            sx={{
-              display: 'flex',
-              alignItems: 'center',
-              bgcolor: '#202327',
-              borderRadius: '9999px',
-              px: 2,
-              py: 1,
-              gap: 1,
-            }}
-          >
-            <Box
-              component="svg"
-              viewBox="0 0 24 24"
-              sx={{ width: 20, height: 20, fill: '#71767b' }}
-            >
-              <path d="M10.25 3.75c-3.59 0-6.5 2.91-6.5 6.5s2.91 6.5 6.5 6.5c1.795 0 3.419-.726 4.596-1.904 1.178-1.177 1.904-2.801 1.904-4.596 0-3.59-2.91-6.5-6.5-6.5zm-8.5 6.5c0-4.694 3.806-8.5 8.5-8.5s8.5 3.806 8.5 8.5c0 1.986-.682 3.815-1.824 5.262l4.781 4.781-1.414 1.414-4.781-4.781c-1.447 1.142-3.276 1.824-5.262 1.824-4.694 0-8.5-3.806-8.5-8.5z" />
-            </Box>
-            <Box
-              component="input"
-              placeholder="Search"
-              sx={{
-                flex: 1,
-                bgcolor: 'transparent',
-                border: 'none',
-                outline: 'none',
-                color: '#e7e9ea',
-                fontSize: '0.938rem',
-                '&::placeholder': {
-                  color: '#71767b',
-                },
-              }}
-            />
-          </Box>
-        </Box>
-
-        <Box sx={{ p: 2 }}>
-          {/* Activity Summary */}
-          <Card
-            sx={{
-              bgcolor: '#16181c',
-              borderRadius: 3,
-              p: 2,
-              mb: 2,
-              border: '1px solid #2f3336',
-            }}
-          >
-            <Typography sx={{ fontWeight: 700, fontSize: '1.25rem', color: '#e7e9ea', mb: 2 }}>
-              Activity Summary
-            </Typography>
-            {[
-              { icon: CampaignIcon, label: 'Posts created', value: userData.stats.posts, color: '#7B1113' },
-              { icon: ReportProblemIcon, label: 'Concerns reported', value: userData.stats.concerns, color: '#2196F3' },
-              { icon: LightbulbIcon, label: 'Suggestions made', value: userData.stats.suggestions, color: '#FF9800' },
-            ].map((stat, index) => (
-              <Box
-                key={index}
-                sx={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: 1.5,
-                  py: 1.5,
-                  borderBottom: index < 2 ? '1px solid #2f3336' : 'none',
-                }}
-              >
-                <Box
-                  sx={{
-                    width: 36,
-                    height: 36,
-                    borderRadius: '50%',
-                    bgcolor: `${stat.color}20`,
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                  }}
-                >
-                  <stat.icon sx={{ color: stat.color, fontSize: 18 }} />
-                </Box>
-                <Box sx={{ flex: 1 }}>
-                  <Typography sx={{ fontSize: '0.875rem', color: '#71767b' }}>
-                    {stat.label}
-                  </Typography>
-                </Box>
-                <Typography sx={{ fontWeight: 700, fontSize: '1rem', color: '#e7e9ea' }}>
-                  {stat.value}
-                </Typography>
-              </Box>
-            ))}
-          </Card>
-
-          {/* Account Info */}
-          <Card
-            sx={{
-              bgcolor: '#16181c',
-              borderRadius: 3,
-              p: 2,
-              border: '1px solid #2f3336',
-            }}
-          >
-            <Typography sx={{ fontWeight: 700, fontSize: '1.25rem', color: '#e7e9ea', mb: 2 }}>
-              Account Information
-            </Typography>
-            {[
-              { label: 'Member since', value: userData.joinedDate },
-              { label: 'District', value: 'Area 2' },
-              { label: 'Account status', value: 'Verified Resident' },
-            ].map((info, index) => (
-              <Box
-                key={index}
-                sx={{
-                  py: 1,
-                  borderBottom: index < 2 ? '1px solid #2f3336' : 'none',
-                }}
-              >
-                <Typography sx={{ fontSize: '0.8125rem', color: '#71767b', mb: 0.25 }}>
-                  {info.label}
-                </Typography>
-                <Typography sx={{ fontSize: '0.9375rem', color: '#e7e9ea' }}>
-                  {info.value}
-                </Typography>
-              </Box>
-            ))}
-          </Card>
-        </Box>
-      </Box>
     </Box>
   );
 }
